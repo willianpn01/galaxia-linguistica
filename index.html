@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galáxia das Figuras de Linguagem</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="galaxy-canvas"></div>
+
+    <header class="control-panel">
+        <h1 class="title">
+            <span class="title-main">Galáxia Linguística</span>
+            <span class="title-sub">Explore as Figuras de Linguagem</span>
+        </h1>
+        
+        <nav class="planets-nav">
+            <button class="planet-btn active" data-tipo="all" title="Ver Todas as Figuras">
+                <div class="planet-visual universo-visual">
+                    <div class="planet-ring"></div>
+                </div>
+                <span class="planet-label">Universo</span>
+            </button>
+            
+            <button class="planet-btn" data-tipo="pensamento" style="--planet-color: #FFD700" title="Figuras de Pensamento">
+                <div class="planet-visual">
+                    <div class="planet-surface"></div>
+                    <div class="planet-glow"></div>
+                </div>
+                <span class="planet-label">Pensamento</span>
+            </button>
+            
+            <button class="planet-btn" data-tipo="sintaxe" style="--planet-color: #4169E1" title="Figuras de Sintaxe">
+                <div class="planet-visual">
+                    <div class="planet-surface"></div>
+                    <div class="planet-glow"></div>
+                </div>
+                <span class="planet-label">Sintaxe</span>
+            </button>
+            
+            <button class="planet-btn" data-tipo="som" style="--planet-color: #FF00FF" title="Figuras de Som">
+                <div class="planet-visual">
+                    <div class="planet-surface"></div>
+                    <div class="planet-glow"></div>
+                </div>
+                <span class="planet-label">Som</span>
+            </button>
+            
+            <button class="planet-btn" data-tipo="palavra" style="--planet-color: #00CED1" title="Figuras de Palavra">
+                <div class="planet-visual">
+                    <div class="planet-surface"></div>
+                    <div class="planet-glow"></div>
+                </div>
+                <span class="planet-label">Palavra</span>
+            </button>
+        </nav>
+    </header>
+
+    <div id="info-overlay" class="info-overlay hidden">
+        <div class="info-card">
+            <button id="close-btn" class="close-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="info-header">
+                <h2 id="info-title" class="info-title">Nome da Figura</h2>
+                <span id="info-tipo" class="info-tipo-badge">Tipo</span>
+            </div>
+            
+            <div class="info-content">
+                <div class="info-section">
+                    <h3 class="info-section-title">Definição</h3>
+                    <p id="info-descricao" class="info-descricao">Descrição da figura de linguagem...</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3 class="info-section-title">Exemplo</h3>
+                    <div class="info-exemplo-box">
+                        <svg class="quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                        </svg>
+                        <p id="info-exemplo" class="info-exemplo">Exemplo prático...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="back-btn" class="back-btn hidden">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Voltar</span>
+    </button>
+
+    <div class="instructions">
+        <p>🖱️ Clique nas estrelas para explorar | 🌍 Clique nos planetas para ver detalhes</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="data.js"></script>
+    <script src="galaxy.js"></script>
+</body>
+</html>
