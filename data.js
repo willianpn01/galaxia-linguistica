@@ -3,7 +3,7 @@ const figurasDeLinguagem = [
         id: 'antitese',
         nome: 'Antítese',
         tipo: 'pensamento',
-        descricao: 'Aproximação de ideias ou palavras com sentidos opostos.',
+        descricao: 'Figura pela qual se opõem, numa mesma frase, duas palavras ou dois pensamentos de sentido contrário.',
         exemplo: 'O riso e o choro são vizinhos.',
         cor: '#FFD700'
     },
@@ -11,7 +11,7 @@ const figurasDeLinguagem = [
         id: 'paradoxo',
         nome: 'Paradoxo',
         tipo: 'pensamento',
-        descricao: 'Ideia aparentemente absurda ou contraditória que, no contexto, revela uma verdade.',
+        descricao: 'Une ideias ou termos contraditórios para expressar uma verdade mais profunda ou complexa',
         exemplo: 'Para conhecer o meu interior é preciso sair de mim.',
         cor: '#FFD700'
     },
@@ -59,7 +59,7 @@ const figurasDeLinguagem = [
         id: 'apostrofe',
         nome: 'Apóstrofe',
         tipo: 'pensamento',
-        descricao: 'Interpelação enfática a alguém ou algo (real ou imaginário), interrompendo o discurso.',
+        descricao: 'Consiste em uma invocação ou interpelação direta a alguém (real ou imaginário) ou algo, interrompendo o discurso para chamar a atenção.',
         exemplo: 'Deus! Ó Deus! Onde estás que não respondes?',
         cor: '#FFD700'
     },

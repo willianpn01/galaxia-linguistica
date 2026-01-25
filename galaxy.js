@@ -13,10 +13,13 @@ class GalaxiaLinguistica {
         this.selectedStar = null;
         this.selectedPlanet = null;
         this.isZoomedToPlanet = false;
+        this.ignoreNextClick = false;
         this.filtroAtivo = 'all';
         this.clock = new THREE.Clock();
         this.controls = null;
         this.useAssets = this.getUseAssetsMode();
+
+        this.syncColorsFromNav();
         
         this.init();
         this.createStarfield();
@@ -39,6 +42,45 @@ class GalaxiaLinguistica {
         } catch (e) {
             return false;
         }
+    }
+
+    isValidCssColor(value) {
+        if (!value) return false;
+        const v = value.trim();
+
+        if (v.startsWith('#')) {
+            if (!(v.length === 4 || v.length === 7 || v.length === 9)) return false;
+            const hex = v.slice(1);
+            return /^[0-9a-fA-F]+$/.test(hex);
+        }
+
+        return false;
+    }
+
+    syncColorsFromNav() {
+        if (typeof document === 'undefined') return;
+        if (typeof planetasConfig === 'undefined') return;
+        if (typeof figurasDeLinguagem === 'undefined') return;
+
+        const buttons = document.querySelectorAll('.planet-btn[data-tipo]');
+        buttons.forEach(btn => {
+            const tipo = btn.dataset.tipo;
+            if (!tipo || tipo === 'all') return;
+            if (!planetasConfig[tipo]) return;
+
+            const raw = getComputedStyle(btn).getPropertyValue('--planet-color').trim();
+            if (!this.isValidCssColor(raw)) {
+                return;
+            }
+
+            planetasConfig[tipo].cor = raw;
+
+            figurasDeLinguagem.forEach(f => {
+                if (f.tipo === tipo) {
+                    f.cor = raw;
+                }
+            });
+        });
     }
 
     init() {
@@ -230,6 +272,8 @@ class GalaxiaLinguistica {
 
         document.querySelectorAll('.planet-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.ignoreNextClick = true;
                 const tipo = e.currentTarget.dataset.tipo;
                 this.filterByType(tipo);
                 
@@ -291,6 +335,11 @@ class GalaxiaLinguistica {
     }
 
     onMouseClick(event) {
+        if (this.ignoreNextClick) {
+            this.ignoreNextClick = false;
+            return;
+        }
+
         this.raycaster.setFromCamera(this.mouse, this.camera);
         
         if (this.isZoomedToPlanet) {
@@ -475,7 +524,7 @@ class GalaxiaLinguistica {
         this.moonLabels = [];
     }
 
-    zoomOut() {
+    zoomOut(onComplete) {
         const backBtn = document.getElementById('back-btn');
         backBtn.classList.remove('visible');
         setTimeout(() => backBtn.classList.add('hidden'), 300);
@@ -513,6 +562,9 @@ class GalaxiaLinguistica {
             onComplete: () => {
                 this.isZoomedToPlanet = false;
                 this.selectedPlanet = null;
+                if (typeof onComplete === 'function') {
+                    onComplete();
+                }
             }
         });
     }
@@ -520,18 +572,18 @@ class GalaxiaLinguistica {
     filterByType(tipo) {
         if (tipo === 'all') {
             if (this.isZoomedToPlanet) {
-                this.zoomOut();
+                this.zoomOut(() => this.applyFilter('all'));
+                return;
             }
             this.applyFilter('all');
             return;
         }
 
         if (this.isZoomedToPlanet) {
-            this.zoomOut();
-            setTimeout(() => {
+            this.zoomOut(() => {
                 const planet = this.planets[tipo];
                 if (planet) this.zoomToPlanet(planet);
-            }, 1600);
+            });
             return;
         }
 
