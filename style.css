@@ -5,10 +5,10 @@
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     
-    --color-pensamento: #FFD700;
-    --color-sintaxe: #4169E1;
-    --color-som: #FF00FF;
-    --color-palavra: #00CED1;
+    --color-pensamento: #1800ad;
+    --color-sintaxe: #8c52ff;
+    --color-som: #f53ec5;
+    --color-palavra: #FBB03B;
 }
 
 * {

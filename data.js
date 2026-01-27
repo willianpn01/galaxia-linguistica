@@ -236,28 +236,28 @@ const figurasDeLinguagem = [
 const planetasConfig = {
     pensamento: {
         nome: 'Pensamento',
-        cor: '#FFD700',
+        cor: '#1800ad',
         posicao: { x: -15, y: 5, z: -10 },
         tamanho: 2.5,
         orbitaRaio: 8
     },
     sintaxe: {
         nome: 'Sintaxe',
-        cor: '#4169E1',
+        cor: '#8c52ff',
         posicao: { x: 15, y: -3, z: -8 },
         tamanho: 2.5,
         orbitaRaio: 8
     },
     som: {
         nome: 'Som',
-        cor: '#FF00FF',
+        cor: '#f53ec5',
         posicao: { x: -12, y: -8, z: 5 },
         tamanho: 2.5,
         orbitaRaio: 8
     },
     palavra: {
         nome: 'Palavra',
-        cor: '#00CED1',
+        cor: '#FBB03B',
         posicao: { x: 12, y: 6, z: 8 },
         tamanho: 2.5,
         orbitaRaio: 8

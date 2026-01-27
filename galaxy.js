@@ -57,6 +57,28 @@ class GalaxiaLinguistica {
         return false;
     }
 
+    resolveCssColor(value, referenceElement) {
+        if (!value) return null;
+        const v = value.trim();
+        if (this.isValidCssColor(v)) return v;
+
+        if (!referenceElement || typeof document === 'undefined') return null;
+
+        const temp = document.createElement('span');
+        temp.style.color = v;
+        temp.style.position = 'absolute';
+        temp.style.left = '-9999px';
+        temp.style.top = '-9999px';
+        referenceElement.appendChild(temp);
+        const resolved = getComputedStyle(temp).color;
+        temp.remove();
+
+        if (resolved && resolved !== 'rgba(0, 0, 0, 0)') {
+            return resolved;
+        }
+        return null;
+    }
+
     syncColorsFromNav() {
         if (typeof document === 'undefined') return;
         if (typeof planetasConfig === 'undefined') return;
@@ -69,15 +91,16 @@ class GalaxiaLinguistica {
             if (!planetasConfig[tipo]) return;
 
             const raw = getComputedStyle(btn).getPropertyValue('--planet-color').trim();
-            if (!this.isValidCssColor(raw)) {
+            const resolved = this.resolveCssColor(raw, btn);
+            if (!resolved) {
                 return;
             }
 
-            planetasConfig[tipo].cor = raw;
+            planetasConfig[tipo].cor = resolved;
 
             figurasDeLinguagem.forEach(f => {
                 if (f.tipo === tipo) {
-                    f.cor = raw;
+                    f.cor = resolved;
                 }
             });
         });

@@ -39,10 +39,10 @@ const figures = [
 
 // Config urações de Cores (devem bater com CSS)
 const colors = {
-    "Pensamento": "#FFD700",
-    "Sintaxe": "#4169E1",
-    "Som": "#FF00FF",
-    "Palavra": "#00CED1"
+    "Pensamento": "#1800ad",
+    "Sintaxe": "#8c52ff",
+    "Som": "#f53ec5",
+    "Palavra": "#FBB03B"
 };
 
 const galaxyContainer = document.getElementById('galaxy-container');
